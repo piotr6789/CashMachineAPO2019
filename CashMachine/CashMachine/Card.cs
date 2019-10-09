@@ -11,6 +11,7 @@ namespace DataBase
         public int Money { get; set; }
         [Required]
         public int Pin { get; set; }
+        public string Type { get; set; }
         [Required]
         [ForeignKey("Owner")]
         public Guid OwnerId { get; set; } // karta przynależy do jednego użytkownika
