@@ -11,15 +11,23 @@ namespace CashMachine.Services
     {
         public static Owner CheckOwner(string ownerId)
         {
-            Guid ownerGuidId = new Guid(ownerId);
-            
-            using (var context = new CardDbContext())
+            try
             {
-                var owner = context.Owner
-                                   .Where(o => o.Id == ownerGuidId)
-                                   .FirstOrDefault();
-                return owner;
+                Guid ownerGuidId = new Guid(ownerId);
+
+                using (var context = new CardDbContext())
+                {
+                    var owner = context.Owner
+                                       .Where(o => o.Id == ownerGuidId)
+                                       .FirstOrDefault();
+                    return owner;
+                }
             }
+            catch
+            {
+                return null;
+            }
+            
         }
     }
 }
