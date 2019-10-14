@@ -12,7 +12,7 @@ namespace DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS; Database=CashMachine; Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB;Database=CashMachine;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
     }
 }
