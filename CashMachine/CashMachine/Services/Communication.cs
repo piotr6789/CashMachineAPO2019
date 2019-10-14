@@ -63,6 +63,10 @@ namespace CashMachine.Services
                         int userCash = CashChecker.CheckCash(owner);
                         Console.WriteLine("Your cash: {0}", userCash);
                     }
+                    if (userChoice == 2)
+                    {
+                        CashDepositer.DepositCash(owner);
+                    }
                 }
                 catch
                 {
