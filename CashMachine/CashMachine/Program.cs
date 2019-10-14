@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CashMachine.Services;
+using System;
 
 namespace CashMachine
 {
@@ -6,7 +7,7 @@ namespace CashMachine
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Communication.Start();
         }
     }
 }
