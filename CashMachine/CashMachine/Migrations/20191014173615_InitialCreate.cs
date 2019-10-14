@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CashMachine.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,8 @@ namespace CashMachine.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CardId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
                     IsAbleToTransfer = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -27,6 +28,7 @@ namespace CashMachine.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Money = table.Column<int>(nullable: false),
                     Pin = table.Column<int>(nullable: false),
+                    Type = table.Column<string>(nullable: true),
                     OwnerId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
