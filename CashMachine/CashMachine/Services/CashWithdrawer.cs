@@ -12,7 +12,7 @@ namespace CashMachine.Services
         public static bool WithdrawCash(Owner owner)
         {
             int cashToWithdraw;
-            Console.WriteLine("How much money do you want to withdraw?");
+            Console.WriteLine("How much money do you want to withdraw??");
             try
             {
                 cashToWithdraw = Convert.ToInt32(Console.ReadLine());

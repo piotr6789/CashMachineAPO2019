@@ -75,7 +75,7 @@ namespace CashMachine.Services
                 }
                 catch
                 {
-                    Console.WriteLine("Invalid command, try again.");
+                    Console.WriteLine("Invalid, command, try again.");
                 }
             }
         }
