@@ -31,7 +31,7 @@ namespace CashMachine.Services
                 }
 
                 var owner = OwnerChecker.CheckOwner(userCard);
-                if (owner != null)
+                if(owner != null)
                 {
                     UserPanel(owner);
                 }
@@ -53,7 +53,11 @@ namespace CashMachine.Services
                 {
                     int userChoice = Convert.ToInt32(Console.ReadLine());
                     exitCommand = userChoice;
-
+                    if (userChoice == 4)
+                    {
+                        Console.WriteLine("Good bye!");
+                        return;
+                    }
                     if (userChoice == 1)
                     {
                         int userCash = CashChecker.CheckCash(owner);
@@ -62,15 +66,6 @@ namespace CashMachine.Services
                     if (userChoice == 2)
                     {
                         CashDepositer.DepositCash(owner);
-                    }
-                    if (userChoice == 3)
-                    {
-                        CashWithdrawer.WithdrawCash(owner);
-                    }
-                    if (userChoice == 4)
-                    {
-                        Console.WriteLine("Good bye!");
-                        return;
                     }
                 }
                 catch
