@@ -19,32 +19,41 @@ namespace CashMachine.Services
         {
             string userCard;
             int exitCommand = 0;
-            Console.WriteLine("Hi, please insert card or type 'exit' to finish.");
             while (true)
             {
+                Console.WriteLine("Please insert card or type 'exit' to finish.");
                 userCard = Console.ReadLine();
                 if (userCard == "exit")
-                    {
-                        Console.WriteLine("Good bye!");
-                        return;
-                    }
-                Console.WriteLine("You are welcome! What do you want today?\n{0}\n{1}\n{2}\n{3}", Options);
-                while (exitCommand != 4)
                 {
-                    try
+                    Console.WriteLine("Good bye!");
+                    return;
+                }
+
+                var owner = OwnerChecker.CheckOwner(userCard);
+                if(owner != null)
+                {
+                    Console.WriteLine("You are welcome! What do you want today?\n{0}\n{1}\n{2}\n{3}", Options);
+                    while (exitCommand != 4)
                     {
-                        int userChoice = Convert.ToInt32(Console.ReadLine());
-                        exitCommand = userChoice;
-                        if (userChoice == 4)
+                        try
                         {
-                            Console.WriteLine("Good bye!");
-                            return;
+                            int userChoice = Convert.ToInt32(Console.ReadLine());
+                            exitCommand = userChoice;
+                            if (userChoice == 4)
+                            {
+                                Console.WriteLine("Good bye!");
+                                return;
+                            }
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Invalid command, try again.");
                         }
                     }
-                    catch
-                    {
-                        Console.WriteLine("Invalid command, try again.");
-                    }
+                }
+                else
+                {
+                    Console.WriteLine("Your card does not exist.");
                 }
             }
         }
