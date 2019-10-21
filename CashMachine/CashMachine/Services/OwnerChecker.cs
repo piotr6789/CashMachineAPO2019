@@ -27,7 +27,6 @@ namespace CashMachine.Services
             {
                 return null;
             }
-            
         }
     }
 }

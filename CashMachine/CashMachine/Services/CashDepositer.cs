@@ -19,7 +19,6 @@ namespace CashMachine.Services
             }
             catch
             {
-                Console.WriteLine("Invalid data type.");
                 return false;
             }
 

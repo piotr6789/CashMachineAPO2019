@@ -7,7 +7,7 @@ namespace CashMachine
     {
         static void Main(string[] args)
         {
-            Communication.Start();
+            Startup.LaunchCashMachine();
         }
     }
 }

@@ -16,66 +16,92 @@ namespace CashMachine.Services
                 "4. Exit."
             };
 
-        public static void Start()
+        public static Owner InsertCard()
         {
-            string userCard;
-            while (true)
+            string userCard = "";
+            
+            while(userCard != "exit")
             {
-                Console.WriteLine("Please insert card or type 'exit' to finish.");
+                Owner owner = null;
 
-                userCard = Console.ReadLine();
-                if (userCard == "exit")
+                while (owner == null)
                 {
-                    Console.WriteLine("Good bye!");
-                    return;
-                }
+                    Console.WriteLine("Please insert card or type 'exit' to finish.");
+                    userCard = Console.ReadLine();
+                    if(userCard == "exit")
+                    {
+                        break;
+                    }
 
-                var owner = OwnerChecker.CheckOwner(userCard);
-                if (owner != null)
-                {
-                    UserPanel(owner);
+                    owner = OwnerChecker.CheckOwner(userCard);
+                    if (owner == null)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Your card does not exist.");
+                        continue;
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Your card does not exist.");
-                }
+                return owner;
             }
+
+            return null;
         }
 
         public static void UserPanel(Owner owner)
         {
             int exitCommand = 0;
 
-            Console.WriteLine("You are welcome! What do you want today?\n{0}\n{1}\n{2}\n{3}", Options);
+            Console.Clear();
+            Console.WriteLine("You are welcome! What do you want today?\n{0}\n{1}\n{2}\n{3}\n", Options);
             while (exitCommand != 4)
             {
                 try
                 {
                     int userChoice = Convert.ToInt32(Console.ReadLine());
                     exitCommand = userChoice;
+                    Console.Clear();
 
-                    if (userChoice == 1)
+                    switch (userChoice)
                     {
-                        int userCash = CashChecker.CheckCash(owner);
-                        Console.WriteLine("Your cash: {0}", userCash);
-                    }
-                    if (userChoice == 2)
-                    {
-                        CashDepositer.DepositCash(owner);
-                    }
-                    if (userChoice == 3)
-                    {
-                        CashWithdrawer.WithdrawCash(owner);
-                    }
-                    if (userChoice == 4)
-                    {
-                        Console.WriteLine("Good bye!");
-                        return;
+                        case 1:
+                            int userCash = CashChecker.CheckCash(owner);
+                            Console.WriteLine("Your cash: {0}", userCash);
+                            Console.WriteLine("\n{0}\n{1}\n{2}\n{3}", Options);
+                            break;
+                        case 2:
+                            var resultDeposit = CashDepositer.DepositCash(owner);
+                            if (!resultDeposit)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid data type.\n\n{0}\n{1}\n{2}\n{3}", Options);
+                                break;
+                            }
+                            Console.WriteLine("\n{0}\n{1}\n{2}\n{3}", Options);
+                            break;
+                        case 3:
+                            var resultWithdraw = CashWithdrawer.WithdrawCash(owner);
+                            if (!resultWithdraw)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid data type.\n\n{0}\n{1}\n{2}\n{3}", Options);
+                                break;
+                            }
+                            Console.WriteLine("\n{0}\n{1}\n{2}\n{3}", Options);
+                            break;
+                        case 4:
+                            Console.Clear();
+                            Console.WriteLine("Good bye!");
+                            return;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Invalid data type.\n\n{0}\n{1}\n{2}\n{3}", Options);
+                            break;
                     }
                 }
                 catch
                 {
-                    Console.WriteLine("Invalid command, try again.");
+                    Console.Clear();
+                    Console.WriteLine("Invalid data type.\n\n{0}\n{1}\n{2}\n{3}", Options);
                 }
             }
         }
